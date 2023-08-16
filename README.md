@@ -84,3 +84,5 @@ The following components must be installed in order to go through the Usage Inst
    OpperHelper.connect([replace with your own bluetooth MAC address])
    ```
 4. For more usage, please refer to the demo.
+
+5. test
