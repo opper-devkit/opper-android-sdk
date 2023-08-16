@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <TextView
+                android:text="固件升级"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:gravity="center"
+                android:padding="5dp"
+                android:background="@color/purple_500"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        <LinearLayout
+                android:gravity="center_vertical"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <ImageButton
+                    android:id="@+id/btnPickFile"
+                    android:src="@drawable/icon_hex"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"/>
+
+            <TextView
+                    android:id="@+id/tvFilePath"
+                    android:text="未选中文件"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"/>
+
+            <Button
+                    android:id="@+id/btnFlush"
+                    android:text="更新固件"
+                    android:padding="10dp"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/purple_200"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="false"
+                    android:max="100"
+                    android:maxHeight="@dimen/dp_15"
+                    android:minHeight="@dimen/dp_15"
+                    android:progress="0" />
+
+        </LinearLayout>
+
+        <TextView
+                android:text="OPPER"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:padding="5dp"
+                android:background="@color/purple_700"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:text="型号："
+                    android:padding="8dp"
+                    android:gravity="end"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:id="@+id/tvModel"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:text="设备号："
+                    android:padding="8dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:gravity="end"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:id="@+id/tvSn"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:text="固件版本："
+                    android:padding="8dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:gravity="end"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:id="@+id/tvFirmwareRevision"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:text="硬件版本："
+                    android:padding="8dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:gravity="end"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:id="@+id/tvHardwareRevision"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:text="软件版本："
+                    android:padding="8dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:gravity="end"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:id="@+id/tvSoftwareRevision"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:id="@+id/tvIdle"
+                    android:padding="8dp"
+                    android:gravity="end"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:text="休眠(0 分钟)："
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"/>
+
+            <SeekBar
+                    android:id="@+id/idleBar"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:id="@+id/tvAccuracy"
+                    android:padding="8dp"
+                    android:gravity="end"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:text="精度(0 克)："
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"/>
+
+            <SeekBar
+                    android:id="@+id/accuracyBar"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:id="@+id/tvVibrateGrams"
+                    android:padding="8dp"
+                    android:gravity="end"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:text="振幅(0 克)："
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"/>
+
+            <SeekBar
+                    android:id="@+id/vibrateGramsBar"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnRef0"
+                    android:text="1.归零"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:text="@string/symbol_next"
+                    android:layout_marginStart="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="100dp"
+                    android:layout_marginStart="5dp"
+                    android:gravity="center"
+                    android:id="@+id/tvAdjustWeight"
+                    android:inputType="numberDecimal"
+                    android:textColorHint="@color/gray"
+                    android:hint="2.输入克"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:text="@string/symbol_next"
+                    android:layout_marginStart="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnRef1"
+                    android:text="3.校准"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+            android:layout_marginTop="20dp"
+            android:background="@color/purple_500"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp">
+
+
+        <LinearLayout
+                android:layout_gravity="center"
+                android:gravity="bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:id="@+id/tvWeight"
+                    android:text="0"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="24pt"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:id="@+id/tvUnit"
+                    android:text="克"
+                    android:textColor="@color/white"
+                    android:textSize="8pt"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:layout_marginStart="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <TextView
+                android:id="@+id/tvBattery"
+                android:text="0%"
+                android:textSize="11sp"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:background="@drawable/ic_battery_empty"
+                android:layout_gravity="top|end"
+                android:layout_width="38dp"
+                android:layout_height="36dp"/>
+
+    </FrameLayout>
+
+
+</LinearLayout>
