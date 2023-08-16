@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">OpperDemo</string>
+    <string name="symbol_next"><![CDATA[→]]></string>
+    <string name="opper_demo">OPPER Demo</string>
+</resources>
