@@ -85,4 +85,3 @@ The following components must be installed in order to go through the Usage Inst
    ```
 4. For more usage, please refer to the demo.
 
-5. test
