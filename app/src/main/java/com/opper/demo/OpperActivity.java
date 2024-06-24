@@ -29,8 +29,6 @@ import com.omofresh.oppersdk.acty.BaseActivity;
 import com.omofresh.oppersdk.dto.Hardware;
 import com.omofresh.oppersdk.dto.OpperDevice;
 import com.omofresh.oppersdk.helper.OpperHelper;
-import com.omofresh.oppersdk.misc.Att;
-import com.omofresh.oppersdk.misc.AttCommandHelper;
 import com.omofresh.oppersdk.misc.SysUnits;
 import com.omofresh.oppersdk.ui.DialogUtil;
 import com.omofresh.oppersdk.ui.Ui;
@@ -81,13 +79,13 @@ public class OpperActivity extends BaseActivity implements ActivityLauncher.OnAc
         handler = new Handler(getMainLooper());
         Button btnRef0 = findViewById(R.id.btnRef0);
         btnRef0.setOnClickListener(v -> {
-            AttCommandHelper.send(Att.ref0((reqId, success) -> {
+            OpperHelper.doZero(success -> {
                 if (success) {
                     showToast("已归零");
                 } else {
                     showToast("归零失败");
                 }
-            }));
+            });
         });
         TextView tvAdjustWeight = findViewById(R.id.tvAdjustWeight);
         Button btnRef1 = findViewById(R.id.btnRef1);
@@ -97,13 +95,13 @@ public class OpperActivity extends BaseActivity implements ActivityLauncher.OnAc
                 try {
                     double val = Double.parseDouble(input);
                     // 砝码重量转换为克
-                    AttCommandHelper.send(Att.ref1(Double.valueOf(val).intValue(), (reqId, success) -> {
+                    OpperHelper.doAdjust(Double.valueOf(val).intValue(), success -> {
                         if (success) {
                             showToast("校准成功");
                         } else {
                             showToast("校准失败");
                         }
-                    }));
+                    });
                 } catch (Exception e) {
                     Log.e(TAG, "adjust err", e);
                     showToast("请输入有效重量");
@@ -131,13 +129,13 @@ public class OpperActivity extends BaseActivity implements ActivityLauncher.OnAc
                 if (setSeekBarText(tvIdle, "休眠", progress, "分钟")) {
                     Debouncer.getInstance().debounce("idleBar", () -> {
                         // 设置休眠
-                        AttCommandHelper.send(Att.idleMinutes(progress, (reqId, success) -> {
+                        OpperHelper.idleShutdown(progress, success -> {
                             if (success) {
                                 Log.d(TAG, "休眠时间设置成功: " + progress + "分钟");
                             } else {
                                 Log.w(TAG, "休眠时间设置失败: " + progress + "分钟");
                             }
-                        }));
+                        });
                     });
                 }
             }
@@ -154,13 +152,13 @@ public class OpperActivity extends BaseActivity implements ActivityLauncher.OnAc
                 if (setSeekBarText(tvAccuracy, "精度", progress, "克")) {
                     Debouncer.getInstance().debounce("accuracyBar", () -> {
                         // 设置休眠
-                        AttCommandHelper.send(Att.accuracy(progress, (reqId, success) -> {
+                        OpperHelper.setAccuracy(progress, success -> {
                             if (success) {
                                 Log.d(TAG, "精度设置成功: " + progress + "克");
                             } else {
                                 Log.w(TAG, "精度设置失败: " + progress + "克");
                             }
-                        }));
+                        });
                     });
                 }
             }
