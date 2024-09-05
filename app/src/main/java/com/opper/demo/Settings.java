@@ -15,7 +15,7 @@ public class Settings {
     /**
      * 小数位，0 取整
      */
-    public static int decimals = 0;
+    public static int decimals = 2;
 
     /**
      * 去皮重量
@@ -25,6 +25,6 @@ public class Settings {
     /**
      * 秤台的振动幅度（取决于秤的精度）
      */
-    public static int vibrateGrams = 2000;
+    public static int vibrateGrams = 0;
 
 }

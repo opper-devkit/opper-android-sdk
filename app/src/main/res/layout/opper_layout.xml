@@ -214,21 +214,29 @@
 
             <TextView
                     android:id="@+id/tvAccuracy"
-                    android:padding="8dp"
+                    android:padding="4dp"
                     android:gravity="end"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:text="精度(0 克)："
+                    android:text="分度值(0 克)："
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"/>
 
-            <SeekBar
-                    android:id="@+id/accuracyBar"
+            <EditText
+                    android:id="@+id/etAccuracy"
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
-                    android:layout_width="match_parent"
+                    android:inputType="numberDecimal"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"/>
+
+            <Button
+                    android:id="@+id/btnAccuracy"
+                    android:text="设置"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
         </LinearLayout>
+
 
         <LinearLayout
                 android:gravity="center_vertical"
