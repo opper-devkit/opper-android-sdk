@@ -14,6 +14,7 @@ import android.os.Handler;
 import android.os.storage.StorageManager;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
@@ -39,6 +40,8 @@ import com.opper.demo.utils.AssetsUtils;
 import com.opper.demo.utils.FileUtils;
 
 import java.io.File;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 import cn.wch.blelib.utils.LogUtil;
@@ -62,13 +65,14 @@ public class OpperActivity extends BaseActivity implements ActivityLauncher.OnAc
     private TextView tvBattery;
     private SeekBar idleBar;
     private TextView tvIdle;
-    private SeekBar accuracyBar;
     private TextView tvAccuracy;
+    private EditText etAccuracy;
     private SeekBar vibrateGramsBar;
     private TextView tvVibrateGrams;
     private volatile boolean afterFirmwareUpgrade = false;
     private final FileUtils fileUtils = new FileUtils(this);
     private Handler handler;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -111,14 +115,12 @@ public class OpperActivity extends BaseActivity implements ActivityLauncher.OnAc
             }
         });
         idleBar = findViewById(R.id.idleBar);
-        accuracyBar = findViewById(R.id.accuracyBar);
+        etAccuracy = findViewById(R.id.etAccuracy);
         vibrateGramsBar = findViewById(R.id.vibrateGramsBar);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             idleBar.setMin(1);
-            accuracyBar.setMin(1);
         }
         idleBar.setMax(30);
-        accuracyBar.setMax(100);
         vibrateGramsBar.setMax(4000);
         tvIdle = findViewById(R.id.tvIdle);
         tvAccuracy = findViewById(R.id.tvAccuracy);
@@ -146,29 +148,29 @@ public class OpperActivity extends BaseActivity implements ActivityLauncher.OnAc
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
         });
-        accuracyBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (setSeekBarText(tvAccuracy, "精度", progress, "克")) {
-                    Debouncer.getInstance().debounce("accuracyBar", () -> {
-                        // 设置休眠
-                        OpperHelper.setAccuracy(progress, success -> {
+
+        Button btnAccuracy = findViewById(R.id.btnAccuracy);
+        btnAccuracy.setOnClickListener(v -> {
+            String str = etAccuracy.getText().toString();
+            if (!StringUtil.isNullOrEmpty(str)) {
+                try {
+                    double val = Double.parseDouble(str);
+                    OpperHelper.setAccuracy(val, (success) -> {
+                        runOnUiThread(() -> {
                             if (success) {
-                                Log.d(TAG, "精度设置成功: " + progress + "克");
+                                Ui.showToast(this, "设置成功");
+                                OpperHelper.check();
                             } else {
-                                Log.w(TAG, "精度设置失败: " + progress + "克");
+                                Ui.showToast(this, "设置失败");
                             }
                         });
                     });
+                } catch (NumberFormatException e) {
+                    Log.e(TAG, "ignore err: " + e.getMessage());
                 }
             }
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
         });
+
         vibrateGramsBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -244,9 +246,9 @@ public class OpperActivity extends BaseActivity implements ActivityLauncher.OnAc
         AssetsUtils.writeBytesToFile(AssetsUtils.getBytes(assetManager, "upgrade.hex"), path + File.separator + "upgrade.hex");
     }
 
-    private boolean setSeekBarText(TextView view, String label, int value, String unit) {
-        if (!view.getText().toString().contains(String.valueOf(value))) {
-            view.setText(String.format("%s(%s %s)：", label, value, unit));
+    private boolean setSeekBarText(TextView view, String label, double value, String unit) {
+        if (!view.getText().toString().contains(value + " ")) {
+            view.setText(String.format("%s(%s %s)：", label, DECIMAL_FORMATS[4].format(value), unit));
             return true;
         }
         return false;
@@ -310,8 +312,7 @@ public class OpperActivity extends BaseActivity implements ActivityLauncher.OnAc
             }
             setSeekBarText(tvIdle,"休眠", o.getIdleMinutes(),"分钟");
             idleBar.setProgress(o.getIdleMinutes());
-            setSeekBarText(tvAccuracy,"精度", o.getAccuracy(),"克");
-            accuracyBar.setProgress(o.getAccuracy());
+            setSeekBarText(tvAccuracy,"分度值", o.getAccuracy(),"克");
         });
     }
 
@@ -329,6 +330,7 @@ public class OpperActivity extends BaseActivity implements ActivityLauncher.OnAc
             new DecimalFormat("0.0#"),
             new DecimalFormat("0.00#"),
             new DecimalFormat("0.000#"),
+            new DecimalFormat("#.##")       // 保留原始值
     };
 
     private void showToast(String msg) {
@@ -376,8 +378,9 @@ public class OpperActivity extends BaseActivity implements ActivityLauncher.OnAc
     @Override
     public void onBleWeight(double weight, boolean stable) {
 //        Log.d(TAG, String.format(Locale.CHINA, "weight: %s stable: %s", weight, stable));
+        double w = BigDecimal.valueOf(weight).setScale(Settings.decimals, RoundingMode.HALF_UP).doubleValue();
         runOnUiThread(() -> {
-            tvWeight.setText(DECIMAL_FORMATS[Settings.decimals].format(weight));
+            tvWeight.setText(DECIMAL_FORMATS[Settings.decimals].format(w));
         });
     }
 
