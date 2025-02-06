@@ -376,7 +376,7 @@ public class OpperActivity extends BaseActivity implements ActivityLauncher.OnAc
     }
 
     @Override
-    public void onBleWeight(double weight, boolean stable) {
+    public void onBleWeight(double weight, long sample, boolean stable) {
 //        Log.d(TAG, String.format(Locale.CHINA, "weight: %s stable: %s", weight, stable));
         double w = BigDecimal.valueOf(weight).setScale(Settings.decimals, RoundingMode.HALF_UP).doubleValue();
         runOnUiThread(() -> {

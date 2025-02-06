@@ -21,8 +21,18 @@ public class App extends Application {
             }
 
             @Override
+            public double offset() {
+                return Settings.offset;
+            }
+
+            @Override
             public double tare() {
                 return Settings.tare;
+            }
+
+            @Override
+            public void onClearWeight(double v) {
+                Settings.offset = v;
             }
 
             @Override
@@ -33,6 +43,11 @@ public class App extends Application {
             @Override
             public int vibrateGrams() {
                 return Settings.vibrateGrams;
+            }
+
+            @Override
+            public double e() {
+                return Settings.e;
             }
         });
     }
