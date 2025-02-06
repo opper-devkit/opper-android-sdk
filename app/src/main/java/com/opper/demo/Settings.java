@@ -23,8 +23,19 @@ public class Settings {
     public static double tare = 0;
 
     /**
+     * 置0偏移量
+     */
+    public static double offset = 0;
+
+    /**
      * 秤台的振动幅度（取决于秤的精度）
      */
     public static int vibrateGrams = 0;
+
+    /**
+     * 秤的精度，100克
+     * 取决于秤的精度
+     */
+    public static int e = 100;
 
 }
