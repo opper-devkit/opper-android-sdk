@@ -46,3 +46,15 @@ dependencies {
     implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
 
 }
+
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = 'com.github.ZenithyIO'
+            artifactId = 'opper-android-sdk' 
+            version = '1.0.1' 
+
+            artifact(file('oppersdk-1.1.4.aar'))  // ✅ 让 JitPack 识别 .aar
+        }
+    }
+}
