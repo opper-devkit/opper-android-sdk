@@ -52,7 +52,7 @@ publishing {
         release(MavenPublication) {
             groupId = 'com.github.ZenithyIO'
             artifactId = 'opper-android-sdk' 
-            version = '1.0.2' 
+            version = '1.0.3' 
 
             artifact(file('oppersdk-1.1.4.aar'))  // ✅ 让 JitPack 识别 .aar
         }
