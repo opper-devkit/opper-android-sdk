@@ -6,7 +6,7 @@ plugins {
 allprojects {
     repositories {
         flatDir {
-            dirs 'app/libs'  // ✅ 让 Gradle 识别 `libs/` 目录
+            dirs 'libs'  // ✅ 让 Gradle 识别 `libs/` 目录
         }
     }
 }
