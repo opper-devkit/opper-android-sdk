@@ -55,7 +55,7 @@ publishing {
             artifactId = "opper-android-sdk" 
             version = "1.0.6"  
 	    
-     	    artifact(file("libs/oppersdk-1.1.4.aar"))
+     	    artifact(file("/app/libs/oppersdk-1.1.4.aar"))
         }
     }
 }
