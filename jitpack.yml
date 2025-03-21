@@ -1,5 +1,4 @@
 jdk:
-  - openjdk17
+  - openjdk11
 install:
-  - cd app
   - ./gradlew build
