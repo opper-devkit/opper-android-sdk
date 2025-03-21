@@ -1,11 +1,6 @@
-apply plugin: 'java'
-apply plugin: 'maven-publish'
-
-group = 'com.github.ZenithyIO'
-version = '1.0'
-
 plugins {
     id("com.android.application")
+    id("maven-publish")
 }
 
 android {
@@ -55,8 +50,12 @@ dependencies {
 
 publishing {
     publications {
-        maven(MavenPublication) {
-		    artifact(file('oppersdk-1.1.4.aar'))  // ✅ 让 JitPack 识别 .aar
+        create<MavenPublication>("release") {
+            groupId = "com.github.ZenithyIO"  
+            artifactId = "opper-android-sdk" 
+            version = "1.0.6"  
+	    
+     	    artifact(file('libs/oppersdk-1.1.4.aar'))
         }
     }
 }
