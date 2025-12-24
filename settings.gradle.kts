@@ -12,6 +12,9 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven("https://jitpack.io")
+        flatDir {
+            dirs("app/libs")  // ✅ 让 Gradle 识别 `libs/` 目录
+        }
     }
 }
 

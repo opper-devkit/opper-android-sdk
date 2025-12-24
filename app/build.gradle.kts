@@ -1,5 +1,6 @@
 plugins {
     id("com.android.application")
+    id("maven-publish")
 }
 
 android {
@@ -45,4 +46,16 @@ dependencies {
     implementation("io.reactivex.rxjava2:rxjava:2.2.9")
     implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
 
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("release") {
+            groupId = "com.github.ZenithyIO"  
+            artifactId = "opper-android-sdk" 
+            version = "1.0.6"  
+	    
+     	    artifact(file("/app/libs/oppersdk-1.1.4.aar"))
+        }
+    }
 }
